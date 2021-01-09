@@ -1,4 +1,4 @@
-# Loss Function Search for Face Recognition
+# (ICML2020) Loss Function Search for Face Recognition
 Xiaobo Wang*, Shuo Wang*, Cheng Chi, Shifeng Zhang, Tao Mei
 
 This is the official implementation of our loss function search for face recognition.
