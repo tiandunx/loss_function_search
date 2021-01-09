@@ -13,6 +13,8 @@ Experimental results on a variety of face recognition benchmarks have demonstrat
 ![image](https://github.com/tiandunx/loss_function_search/blob/master/resource/result.png)
 ## Our Search Space
 ![image](https://github.com/tiandunx/loss_function_search/blob/master/resource/search_space.png)
+To validate the effectiveness of our search space, one can simply choose random-softmax. In train.sh, you can set do_search=1.
+![image](https://github.com/tiandunx/loss_function_search/blob/master/resource/random_softmax.png)
 ## How to train
 ### Prerequisite
 Pytorch 1.1 or higher are required.
