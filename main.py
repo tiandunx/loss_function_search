@@ -85,7 +85,7 @@ def train(conf):
     data_loader = DataLoader(db, conf.batch_size, sampler=lmdb_sampler, num_workers=4)
 
     # create LFS
-    lfs = LossFuncSearch(conf.scale)
+    lfs = LossFuncSearch(conf.scale, True if conf.do_search == 1 else False)
     lfs.set_model(model)
 
     for epoch in range(conf.epochs):
@@ -117,6 +117,7 @@ def main(argv):
     conf.add_argument('--feat_dim', type=int, default=512, help='feature dimension.')
     conf.add_argument('--scale', type=int, default=32, help='loss function search scale parameters.')
     conf.add_argument('--search_type', type=str, default='global', choices=['global', 'local'])
+    conf.add_argument('--do_search', type=int, default=1, help='if 1, do loss search otherwise perform random softmax')
     conf.add_argument('--step', type=str, default='4,8,10',
                       help='similar to step specified in caffe solver, but in epoch mechanism')
     conf.add_argument('--epochs', type=int, default=20, help='how many epochs you want to train.')

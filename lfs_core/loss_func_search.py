@@ -1,4 +1,4 @@
-from lfs_core.utils.loss import loss_search
+from lfs_core.utils.loss import loss_search, loss_random
 from lfs_core.utils.loss_agent import LFSAgent
 import lfs_core.link_utils as link
 import torch
@@ -6,7 +6,7 @@ import torch.distributed as dist
 
 
 class LossFuncSearch(object):
-    def __init__(self, sm=32):
+    def __init__(self, sm=32, do_search=True):
         self.model = None
 
         self.lr = 0.05
@@ -18,6 +18,7 @@ class LossFuncSearch(object):
         self.best_epoch = -1
         self.sm = sm
         self.__init_agent()
+        self.do_search = do_search
 
     def __init_agent(self):
         self.agent = LFSAgent(self.lr, self.scale)
@@ -28,7 +29,10 @@ class LossFuncSearch(object):
         self.model = model
 
     def get_loss(self, outputs, targets):
-        loss = loss_search(outputs, targets, self.p, self.a, self.sm)
+        if self.do_search:
+            loss = loss_search(outputs, targets, self.p, self.a, self.sm)
+        else:
+            loss = loss_random(outputs, targets)
         return loss
 
     def set_loss_parameters(self, epoch):

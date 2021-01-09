@@ -36,3 +36,10 @@ def loss_search(outputs, targets, p_bins, a, sm, search_type='global'):
     outputs = my_loss(outputs, lb, p_bins, a, sm, search_type)
     loss = F.nll_loss(torch.log(outputs), targets)
     return loss
+
+def loss_random(pred, label, a):
+    prob = F.softmax(pred, dim=1)
+    prob_margin = prob / (a * prob + 1 - a)
+    pred_log = torch.log(prob_margin)
+    loss = F.nll_loss(pred_log, label)
+    return loss
