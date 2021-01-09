@@ -91,13 +91,13 @@ def train(conf):
     for epoch in range(conf.epochs):
         lr_schedule.step()
         lfs.set_loss_parameters(epoch)
-        train_one_epoch(data_loader, model, optimizer, lfs, epoch, device_list[0], conf.print_freq, conf.saved_freq,
-                        conf.saved_dir)
+        train_one_epoch(data_loader, model, optimizer, lfs, epoch, device_list[0], conf.print_freq, conf.saved_freq, conf.saved_dir)
         lmdb_sampler.set_epoch(epoch)
         if epoch != 0 and (epoch + 1) % conf.val_freq == 0 and (epoch + 1) >= 3:
             reward = validate(model.feat_net, conf.test_pairs, conf.test_data_loader, output_device)
             logger.info('rank: %d, acc = %f' % (my_rank, reward))
-            lfs.update_lfs(reward)
+            if conf.do_search == 1:
+                lfs.update_lfs(reward)
     db.close()
 
 
