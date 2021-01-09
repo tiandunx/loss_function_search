@@ -9,8 +9,10 @@ In face recognition, designing margin-based (e.g., angular, additive, additive a
 However, these hand-crafted heuristic methods are sub-optimal because they require much effort to explore the large design space.
 We first analyze that the key to enhance the feature discrimination is actually how to <font color=#FF0000>**reduce the softmax probability** </font>. We then design a unified formulation for the current margin-based softmax losses. Accordingly, we define a novel search space and develop a reward-guided search method to automatically obtain the best candidate.
 Experimental results on a variety of face recognition benchmarks have demonstrated the effectiveness of our method over the state-of-the-art alternatives.
+## Results
+[!image](https://github.com/tiandunx/loss_function_search/blob/master/resource/result.png)
 ## Our Search Space
-
+[!image](https://github.com/tiandunx/loss_function_search/blob/master/resource/search_space.png)
 ## How to train
 ### Prerequisite
 Pytorch 1.1 or higher are required.
